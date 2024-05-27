@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users List</title>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/style.css}"/>
+    <style>
+        table, th, td {
+            border: 1px double darkslategray;
+        }
+
+        table {
+            border-spacing: 3px;
+        }
+
+        th, td {
+            background-color: #96D4D4;
+            padding: 5px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        table td:nth-child(1) {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Users List</h1>
+
+<h1>
+
+    <div>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:utext="${user.getId()}"></td>
+                <td th:utext="${user.getFirstName()}"></td>
+                <td th:utext="${user.getLastName()}"></td>
+                <td th:utext="${user.getEmail()}"></td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <hr/>
+
+    <a href="/new">Create User</a>
+    <br/>
+    <a href="/limit">Read Limited Users List</a>
+    <br/>
+    <a href="/id">Read User by Id</a>
+    <br/>
+    <a href="/edit">Update User</a>
+    <br/>
+    <a href="/delete">Delete User</a>
+
+</h1>
+
+</body>
+</html>

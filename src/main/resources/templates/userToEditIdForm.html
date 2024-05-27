@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Edited User ID</title>
+    <style>
+        form {
+            background-color: #96D4D4;
+        }
+
+        input[type="submit"] {
+            background-color: darkslategray;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>User to Update ID</h1>
+<h2>
+
+    <form th:method="post" th:action="@{/editedUser}">
+        <label for="userId">Enter User to Update ID:</label>
+        <input type="number" id="userId" name="userId" required>
+
+        <br/>
+        <hr/>
+
+        <input type="submit" value="Get User to Update Details!">
+
+    </form>
+
+</h2>
+
+<br/>
+<hr/>
+
+<h1>
+    <a href="/users">Go to Users List</a>
+</h1>
+
+</body>
+</html>
