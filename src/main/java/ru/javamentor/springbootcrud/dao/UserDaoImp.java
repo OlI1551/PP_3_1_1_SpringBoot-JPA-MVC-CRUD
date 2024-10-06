@@ -1,11 +1,11 @@
 package ru.javamentor.springbootcrud.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.javamentor.springbootcrud.model.User;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
 import java.util.List;
+import ru.javamentor.springbootcrud.model.User;
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Repository
@@ -15,35 +15,37 @@ public class UserDaoImp implements UserDao {
    private EntityManager entityManager;
 
    @Override
-   @Transactional(readOnly = true)
    public List<User> getUsersList() {
       return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
    }
 
    @Override
-   @Transactional(readOnly = true)
    public User getUserById(Long id) {
+      if (entityManager.find(User.class, id) == null) {
+         throw new EntityNotFoundException(String.format("Пользователь c ID '%s'  не найден", id));
+      }
       return entityManager.find(User.class, id);
    }
 
    @Override
-   @Transactional
    public void addUser(User user) {
       entityManager.persist(user);
    }
 
    @Override
-   @Transactional
    public void updateUser(User user) {
+      if (entityManager.find(User.class, user.getId()) == null) {
+         throw new EntityNotFoundException(String.format("Пользователь c ID '%s'  не найден", user.getId()));
+      }
       entityManager.merge(user);
    }
 
    @Override
-   @Transactional
    public void deleteUserById(Long id) {
       User user = entityManager.find(User.class, id);
-      if (user != null) {
-         entityManager.remove(user);
+      if (user == null) {
+         throw new EntityNotFoundException(String.format("Пользователь c ID '%s'  не найден", id));
       }
+      entityManager.remove(user);
    }
 }
