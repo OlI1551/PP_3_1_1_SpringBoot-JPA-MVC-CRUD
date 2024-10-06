@@ -22,10 +22,10 @@
 <body>
 <h1>Users List Limit</h1>
 <h2>
-
     <form th:method="post" th:action="@{/users}">
         <label for="count">Enter Users List Limit:</label>
-        <input type="number" id="count" name="count" required>
+        <input type="number" id="count" name="count">
+        <p style="color:red" th:if="${error}" th:text="${error}">Users List Limit Error</p>
 
         <br/>
         <hr/>
@@ -33,15 +33,11 @@
         <input type="submit" value="Get Limited Users List!">
 
     </form>
-
 </h2>
-
 <br/>
 <hr/>
-
 <h1>
     <a href="/users">Go to Users List</a>
 </h1>
-
 </body>
 </html>

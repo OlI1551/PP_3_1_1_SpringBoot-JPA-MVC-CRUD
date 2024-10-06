@@ -6,6 +6,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import java.util.Objects;
 
 
@@ -18,12 +21,18 @@ public class User {
    private Long id;
 
    @Column(name = "name")
+   @NotEmpty(message = "Name should not be empty")
+   @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
    private String firstName;
 
    @Column(name = "last_name")
+   @NotEmpty(message = "Last name should not be empty")
+   @Size(min = 2, max = 30, message = "Last name should be between 2 and 30 characters")
    private String lastName;
 
    @Column(name = "email")
+   @NotEmpty(message = "Email should not be empty")
+   @Email(message = "Email should be valid")
    private String email;
 
    public User() {}
